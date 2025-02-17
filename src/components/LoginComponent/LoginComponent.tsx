@@ -17,7 +17,6 @@ export const LoginComponent = () => {
     const customHandler = async (formDataProps: IUserLoginPass) => {
         const authRes = await getUserAuthData(formDataProps);
         if (authRes) {
-            console.log(authRes);
             setAuthUser(authRes);
             router.push('/main');
         }

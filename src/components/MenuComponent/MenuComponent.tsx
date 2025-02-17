@@ -7,7 +7,6 @@ import { useEffect, useState } from "react";
 
 const MenuComponent = () => {
     const [authUser, setAuthUser] = useState<ILoginResponse>();
-    console.log('menu authuser',authUser);
 
     useEffect(() => {
         setAuthUser(getAuthUser());
