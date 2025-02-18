@@ -1,22 +1,18 @@
-'use client';
-
+import UsersComponent from "@/components/Users/UsersComponent";
 import { getAll } from "@/services/api.service";
-import { getAToken, getUsersRespFromCook } from "@/services/cookies";
-import { useSearchParams } from "next/navigation";
-import { useEffect } from "react";
 
-const UsersPage = () => {
-    const usersResponse = getUsersRespFromCook();
-    const [searchParams, setSearchParams] = useSearchParams({skip:'0', limit: '30'});
+const UsersPage = async () => {
 
-    console.log('usersResponse', usersResponse);
+    const usersResp = await getAll('/users', '', '')
 
-    useEffect(() => {
-        getAll('/auth/users', searchParams.toString(), getAToken());
-    },[searchParams]);
+    console.log(usersResp);
+    const {users} = usersResp;
 
     return(
-        <>Page - users</>
+        <div className="page_users">
+            
+            <UsersComponent users={users}/>
+        </div>
         )
 }
 

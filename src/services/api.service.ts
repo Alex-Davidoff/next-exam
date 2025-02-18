@@ -34,9 +34,6 @@ export const getAll =  async (endpoint:string, searchParams: string, aToken:stri
               'Authorization': 'Bearer '+aToken, 
             }
         })
-        if (response.ok) {
-            setUsersRespInCook(await response.json());
-        } else {
-            throw new Error(`Err ${response.status}`)
-        }
+        .then(res => res.json());
+    return response;
 }
