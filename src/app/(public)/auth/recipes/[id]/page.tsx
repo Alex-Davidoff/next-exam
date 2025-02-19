@@ -24,7 +24,7 @@ const RecipePage = () => {
                 }
             };
             loadData();
-        },[id]);
+        },[id, router]);
 
 
     if (recipe) {

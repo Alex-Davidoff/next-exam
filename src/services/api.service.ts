@@ -58,7 +58,7 @@ const refreshTokens = async (): Promise<void> =>{
     })
     .then((res) =>(res.json()));
     if (refreshResponse) {
-        let currentUser = getAuthUser();
+        const currentUser = getAuthUser();
         if (currentUser) {
             currentUser.accessToken = refreshResponse.accessToken;
             currentUser.refreshToken = refreshResponse.refreshToken;

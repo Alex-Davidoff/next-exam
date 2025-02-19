@@ -28,7 +28,7 @@ const RecipesPage = () => {
         const loadData = async (tsp: ReadonlyURLSearchParams) => {
             const q: string = tsp.get('q') || '';
             const tag: string = tsp.get('tag') || '';
-            let res: IRecipesResponse | null = {};
+            let res: IRecipesResponse | null = null;
             if (q) {
                 if (q.match(/[a-zA-Z]/g)) {
                     res = await getAuthData<IRecipesResponse>('/auth/recipes/search', tsp.toString())
@@ -47,7 +47,7 @@ const RecipesPage = () => {
             }
         }
         loadData(sp);       
-    },[sp]);    
+    },[router, sp]);    
 
 
     if (recipesResp) {

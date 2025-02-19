@@ -28,7 +28,7 @@ const UsersPage = () => {
     useEffect(()=> {
         const loadData = async (tsp: ReadonlyURLSearchParams) => {
             const q: string = tsp.get('q') || '';
-            let res: IUserResponse | null = {};
+            let res: IUserResponse | null = null;
             if (q) {
                 if (q.match(/[a-zA-Z]/g)) {
                     res = await getAuthData<IUserResponse>('/auth/users/search', tsp.toString())
@@ -44,7 +44,7 @@ const UsersPage = () => {
             }
         }
         loadData(sp);
-    },[sp]);
+    },[router, sp]);
 
     if (usersResp) {
     return(

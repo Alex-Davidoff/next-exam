@@ -2,6 +2,7 @@
 
 import { ILoginResponse } from "@/models/IAPIReqRes";
 import { getAuthUser } from "@/services/cookies";
+import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 
@@ -22,7 +23,7 @@ const MenuComponent = () => {
             </ul>
             <div className="flex gap-4 items-center">
                 <p className="text-xl italic">{aUser.firstName} {aUser.lastName}</p>
-                <img className="size-12" src={aUser.image} alt={`${aUser.firstName} ${aUser.lastName}`} />
+                <Image src={aUser.image} alt={`${aUser.firstName} ${aUser.lastName}`} width={48} height={48}/>
             </div>
             
         </div>

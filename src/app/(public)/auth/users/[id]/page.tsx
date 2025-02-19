@@ -34,7 +34,7 @@ const UserPage = () => {
             }
         };
         loadData();
-    },[id]);
+    },[id, router]);
 
     
 
