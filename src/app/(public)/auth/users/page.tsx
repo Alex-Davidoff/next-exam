@@ -15,7 +15,8 @@ const UsersPage = () => {
     const [usersResp, setUsersResp] = useState<IUserResponse>();
 
     let users: IUser[] = [];
-    let usersCount, usersTotal:number = 0;
+    let usersCount: number = 0;
+    let usersTotal:number = 0;
     if (usersResp) {
         users = usersResp.users;
         usersCount = users.length;
