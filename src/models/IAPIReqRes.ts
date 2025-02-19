@@ -13,4 +13,9 @@ export interface ILoginResponse{
     image: string,
     accessToken: string;
     refreshToken: string;
-  }
+}
+
+export interface ITokensPair {
+    accessToken: string;
+    refreshToken: string;
+}

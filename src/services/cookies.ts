@@ -22,3 +22,11 @@ export const getAToken = () => {
         return accessToken;
     }
 }
+
+export const getRToken = () => {
+    const authUserData = getCookie('authUser')?.toString();
+    if (authUserData) {
+        const {refreshToken} = JSON.parse(authUserData);
+        return refreshToken;
+    }
+}
