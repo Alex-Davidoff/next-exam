@@ -1,5 +1,6 @@
 'use client';
 
+import MenuComponent from "@/components/MenuComponent/MenuComponent";
 import { RecipeComponent } from "@/components/RecipesComponents/RecipeComponent";
 import { IRecipe } from "@/models/IRecipe";
 import { getAuthData } from "@/services/api.service";
@@ -23,6 +24,7 @@ const RecipePage = () => {
     if (recipe) {
         return(
             <div className="page_user">
+                <MenuComponent/>
                 <RecipeComponent recipe={recipe}/>
             </div>
         )}

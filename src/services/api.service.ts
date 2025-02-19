@@ -27,7 +27,6 @@ export const getAll =  async(endpoint:string, searchParams: string) => {
     let sp = '';
     if (searchParams) {sp = '?'+searchParams};
     try {
-    console.log('try fetch ', endpoint, searchParams);
     const response = await fetch(APIBaseUrl+endpoint+sp,
         {
             method: 'GET',
@@ -37,7 +36,6 @@ export const getAll =  async(endpoint:string, searchParams: string) => {
             next: {revalidate: 60}
         })
         .then(res => res.json());
-        console.log('fetch result ', response);
         if (!response?.message) {
             return response;
         }

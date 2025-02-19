@@ -1,5 +1,6 @@
 'use client';
 
+import MenuComponent from "@/components/MenuComponent/MenuComponent";
 import RecipesComponent from "@/components/RecipesComponents/RecipesComponent";
 import UserComponent from "@/components/Users/UserComponent";
 import { IRecipe, IRecipesResponse } from "@/models/IRecipe";
@@ -35,6 +36,7 @@ const UserPage = () => {
     if (user) {
     return(
         <div className="page_user">
+            <MenuComponent/>
             <UserComponent user={user}/>
             {userRecipes && <RecipesComponent recipes={userRecipes}/>}            
         </div>
