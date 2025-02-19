@@ -50,7 +50,7 @@ const UsersPage = () => {
     return(
         <div className="page_users">
             <MenuComponent/>
-            <Suspense>
+            <Suspense fallback={<div>Завантаження ...</div>}>
                 <SearchComponent/>
             </Suspense>
             <UsersComponent users={users}/>

@@ -54,7 +54,7 @@ const RecipesPage = () => {
         return(
             <div className="page_users">
                 <MenuComponent/>
-                <Suspense>
+                <Suspense fallback={<div>Завантаження ...</div>}>
                     <SearchComponent/>
                 </Suspense>
                 <RecipesComponent recipes={recipes}/>
