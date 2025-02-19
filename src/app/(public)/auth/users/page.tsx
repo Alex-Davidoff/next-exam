@@ -7,10 +7,12 @@ import UsersComponent from "@/components/Users/UsersComponent";
 import { IUser, IUserResponse } from "@/models/IUser";
 import { getAuthData } from "@/services/api.service";
 import { ReadonlyURLSearchParams, useSearchParams } from "next/navigation";
+import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
 const UsersPage = () => {
     const sp = useSearchParams();
+    const router = useRouter();
 
     const [usersResp, setUsersResp] = useState<IUserResponse>();
 
@@ -37,6 +39,8 @@ const UsersPage = () => {
             else { res = await getAuthData<IUserResponse>('/auth/users', tsp.toString())}
             if (res) {
                 setUsersResp(res);
+            } else {
+                router.push('/main');
             }
         }
         loadData(sp);

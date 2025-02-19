@@ -6,11 +6,12 @@ import RecipesComponent from "@/components/RecipesComponents/RecipesComponent";
 import SearchComponent from "@/components/SearchComponent/SearchComponent";
 import { IRecipe, IRecipesResponse } from "@/models/IRecipe";
 import { getAuthData } from "@/services/api.service";
-import { ReadonlyURLSearchParams, useSearchParams } from "next/navigation";
+import { ReadonlyURLSearchParams, useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 
 const RecipesPage = () => {
     const sp = useSearchParams();
+    const router = useRouter();
 
     const [recipesResp, setRecipesResp] = useState<IRecipesResponse>();
 
@@ -41,6 +42,8 @@ const RecipesPage = () => {
             else { res = await getAuthData<IRecipesResponse>('/auth/recipes', tsp.toString())}
             if (res) {
                 setRecipesResp(res);
+            } else {
+                router.push('/main');
             }
         }
         loadData(sp);       
