@@ -8,7 +8,7 @@ import { IUser, IUserResponse } from "@/models/IUser";
 import { getAuthData } from "@/services/api.service";
 import { ReadonlyURLSearchParams, useSearchParams } from "next/navigation";
 import { useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
+import { Suspense, useEffect, useState } from "react";
 
 const UsersPage = () => {
     const sp = useSearchParams();
@@ -50,7 +50,9 @@ const UsersPage = () => {
     return(
         <div className="page_users">
             <MenuComponent/>
-            <SearchComponent/>
+            <Suspense>
+                <SearchComponent/>
+            </Suspense>
             <UsersComponent users={users}/>
             <PaginationComponent arrayCount={usersCount} arrayTotal={usersTotal}/>
         </div>

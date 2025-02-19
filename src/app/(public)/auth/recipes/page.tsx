@@ -7,7 +7,7 @@ import SearchComponent from "@/components/SearchComponent/SearchComponent";
 import { IRecipe, IRecipesResponse } from "@/models/IRecipe";
 import { getAuthData } from "@/services/api.service";
 import { ReadonlyURLSearchParams, useRouter, useSearchParams } from "next/navigation";
-import { useEffect, useState } from "react";
+import { Suspense, useEffect, useState } from "react";
 
 const RecipesPage = () => {
     const sp = useSearchParams();
@@ -54,7 +54,9 @@ const RecipesPage = () => {
         return(
             <div className="page_users">
                 <MenuComponent/>
-                <SearchComponent/>
+                <Suspense>
+                    <SearchComponent/>
+                </Suspense>
                 <RecipesComponent recipes={recipes}/>
                 <PaginationComponent arrayCount={recipesCount} arrayTotal={recipesTotal}/>
             </div>
