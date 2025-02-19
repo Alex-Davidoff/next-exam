@@ -1,6 +1,7 @@
 'use client';
 
 import PaginationComponent from "@/components/PaginationComponent/PaginationComponent";
+import SearchComponent from "@/components/SearchComponent/SearchComponent";
 import UsersComponent from "@/components/Users/UsersComponent";
 import { IUser, IUserResponse } from "@/models/IUser";
 import { getAll } from "@/services/api.service";
@@ -9,10 +10,6 @@ import { useEffect, useState } from "react";
 
 const UsersPage = () => {
     const sp = useSearchParams();
-    const skip  = sp.get('skip') || '0';
-    const limit  = sp.get('limit') || '30';
-    
-
 
     const [usersResp, setUsersResp] = useState<IUserResponse>();
 
@@ -27,7 +24,10 @@ const UsersPage = () => {
 
     useEffect(()=> {
         const loadData = async (tsp: ReadonlyURLSearchParams) => {
-            const res = await getAll<IUserResponse>('/users', tsp.toString(), '');
+            const q: string = tsp.get('q') || '';
+            let res: IUserResponse = {};
+            if (q) { res = await getAll<IUserResponse>('/users/search', tsp.toString(), '')}
+             else { res = await getAll<IUserResponse>('/users', tsp.toString(), '')}
             setUsersResp(res);
         }
         loadData(sp);
@@ -36,7 +36,7 @@ const UsersPage = () => {
     if (usersResp) {
     return(
         <div className="page_users">
-            
+            <SearchComponent/>
             <UsersComponent users={users}/>
             <PaginationComponent arrayCount={usersCount} arrayTotal={usersTotal}/>
         </div>
