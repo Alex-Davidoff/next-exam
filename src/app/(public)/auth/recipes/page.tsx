@@ -26,6 +26,7 @@ const RecipesPage = () => {
     useEffect(()=> {
         const loadData = async (tsp: ReadonlyURLSearchParams) => {
             const q: string = tsp.get('q') || '';
+            const tag: string = tsp.get('tag') || '';
             let res: IRecipesResponse | null = {};
             if (q) {
                 if (q.match(/[a-zA-Z]/g)) {
@@ -33,6 +34,9 @@ const RecipesPage = () => {
                 } else if (q.match(/[0-9]/g)) {
                     res = await getAuthData<IRecipesResponse>('/auth/recipes/filter?key=id&value='+q, '')
                 }
+            }
+            else if (tag) {
+                res = await getAuthData<IRecipesResponse>('/auth/recipes/tag/'+tag, '')
             }
             else { res = await getAuthData<IRecipesResponse>('/auth/recipes', tsp.toString())}
             if (res) {
