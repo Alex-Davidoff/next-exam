@@ -24,7 +24,7 @@ export const RecipeComponent = ({recipe}: IRecipeProps) => {
             <p>reviewCount: {recipe.reviewCount}</p>
             </span>
             <RecipeTagsComponent tags={recipe.tags}/>
-            <Image src={recipe.image} alt={recipe.name} className="size-80 mx-auto"/>
+            <Image src={recipe.image} alt={recipe.name} width={320} height={320} className="mx-auto"/>
             <span>ingredients: <RecipeArrayStringsComponent arrstr={recipe.ingredients}/>
             </span>
             <span>instructions: <RecipeArrayStringsComponent arrstr={recipe.instructions}/>

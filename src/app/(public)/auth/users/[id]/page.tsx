@@ -16,8 +16,6 @@ const UserPage = () => {
     const [user, setUser] = useState<IUser>();
     const [userRecipes, setUserRecipes] = useState<IRecipe[]>();
 
-    console.log(userRecipes);
-
     useEffect(()=> {
         const loadData = async () => {
             const tuser = await getAuthData<IUser>('/auth/users/'+id, '');
