@@ -28,7 +28,6 @@ export const getAll =  async(endpoint:string, searchParams: string) => {
     if (searchParams) {sp = '?'+searchParams};
     try {
     console.log('try fetch ', endpoint, searchParams);
-    console.log('token ', getAToken());
     const response = await fetch(APIBaseUrl+endpoint+sp,
         {
             method: 'GET',
