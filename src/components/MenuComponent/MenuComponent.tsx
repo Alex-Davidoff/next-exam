@@ -6,13 +6,13 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 
 const MenuComponent = () => {
-    const [authUser, setAuthUser] = useState<ILoginResponse>();
+    const [aUser, setAUser] = useState<ILoginResponse>();
 
     useEffect(() => {
-        setAuthUser(getAuthUser());
+        setAUser(getAuthUser());
     },[]);
 
-    if (authUser) {
+    if (aUser) {
         return(
         <div className="component_menu mb-1 flex justify-between items-center bg-sky-50">
             <ul className="flex gap-4 pl-4">
@@ -20,8 +20,8 @@ const MenuComponent = () => {
                 <li className="underline border border-orange-600 rounded-sm px-4"><Link href='/auth/recipes'>Recipes</Link></li>
             </ul>
             <div className="flex gap-4 items-center">
-                <p className="text-xl italic">{authUser.firstName} {authUser.lastName}</p>
-                <img className="size-12" src={authUser.image} alt={`${authUser.firstName} ${authUser.lastName}`} />
+                <p className="text-xl italic">{aUser.firstName} {aUser.lastName}</p>
+                <img className="size-12" src={aUser.image} alt={`${aUser.firstName} ${aUser.lastName}`} />
             </div>
             
         </div>

@@ -1,5 +1,4 @@
 import { ILoginResponse, IUserLoginPass } from "@/models/IAPIReqRes";
-import { setUsersRespInCook } from "./cookies";
 
 const APIBaseUrl = 'https://dummyjson.com';
 
@@ -23,10 +22,11 @@ export const getUserAuthData = async ({username, password}: IUserLoginPass): Pro
     }
 }
 
-export const getAll =  async (endpoint:string, searchParams: string, aToken:string) => {
+export const getAll =  async <T,>(endpoint:string, searchParams: string, aToken:string) => {
     let sp = '';
     if (searchParams) {sp = '?'+searchParams};
     console.log('try fetch ', APIBaseUrl+endpoint+sp);
+
     const response = await fetch(APIBaseUrl+endpoint+sp,
         {
             method: 'GET',
@@ -35,5 +35,7 @@ export const getAll =  async (endpoint:string, searchParams: string, aToken:stri
             }
         })
         .then(res => res.json());
-    return response;
+    console.log('response',response);
+    
+    return response as T;
 }
