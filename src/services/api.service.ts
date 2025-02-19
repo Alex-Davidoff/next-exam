@@ -26,15 +26,19 @@ export const getUserAuthData = async ({username, password}: IUserLoginPass): Pro
 export const getAll =  async(endpoint:string, searchParams: string) => {
     let sp = '';
     if (searchParams) {sp = '?'+searchParams};
-try {
+    try {
+    console.log('try fetch ', endpoint, searchParams);
+    console.log('token ', getAToken());
     const response = await fetch(APIBaseUrl+endpoint+sp,
         {
             method: 'GET',
             headers: {
               'Authorization': 'Bearer '+getAToken(), 
-            }
+            },
+            next: {revalidate: 60}
         })
         .then(res => res.json());
+        console.log('fetch result ', response);
         if (!response?.message) {
             return response;
         }
