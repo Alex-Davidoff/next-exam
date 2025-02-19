@@ -4,7 +4,7 @@ import PaginationComponent from "@/components/PaginationComponent/PaginationComp
 import UsersComponent from "@/components/Users/UsersComponent";
 import { IUser, IUserResponse } from "@/models/IUser";
 import { getAll } from "@/services/api.service";
-import { useSearchParams } from "next/navigation";
+import { ReadonlyURLSearchParams, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 
 const UsersPage = () => {
@@ -26,15 +26,12 @@ const UsersPage = () => {
     }
 
     useEffect(()=> {
-        const loadData = async (fskip: string, flimit: string) => {
-            const tsp = new URLSearchParams();
-            tsp.set('skip', fskip);
-            tsp.set('limit', flimit);
+        const loadData = async (tsp: ReadonlyURLSearchParams) => {
             const res = await getAll<IUserResponse>('/users', tsp.toString(), '');
             setUsersResp(res);
         }
-        loadData(skip, limit);
-    },[limit, skip]);
+        loadData(sp);
+    },[sp]);
 
     if (usersResp) {
     return(
