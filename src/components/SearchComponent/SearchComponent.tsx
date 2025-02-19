@@ -16,7 +16,6 @@ const SearchComponent = () => {
        useForm<ISearchByParams>({mode: 'all', resolver: joiResolver(searchValidator)});
     
     const customHandler = async (formDataProps: ISearchByParams) => {
-        //setSearchParams({q: formDataProps.searchBy});
         const params = new URLSearchParams();
         params.set('q', formDataProps.searchBy);
         router.push(`?${params.toString()}`);
