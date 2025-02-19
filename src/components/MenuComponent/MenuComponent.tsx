@@ -16,6 +16,7 @@ const MenuComponent = () => {
         return(
         <div className="component_menu mb-1 flex justify-between items-center bg-sky-50">
             <ul className="flex gap-4 pl-4">
+                <li className="underline border border-orange-600 rounded-sm px-4"><Link href='/main'>Main</Link></li>
                 <li className="underline border border-orange-600 rounded-sm px-4"><Link href='/auth/users'>Users</Link></li>
                 <li className="underline border border-orange-600 rounded-sm px-4"><Link href='/auth/recipes'>Recipes</Link></li>
             </ul>

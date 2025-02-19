@@ -11,7 +11,7 @@ export const getUserAuthData = async ({username, password}: IUserLoginPass): Pro
             body: JSON.stringify({
               username: username,
               password: password,
-              expiresInMins: 2, 
+              expiresInMins: 5, 
             })
           })
           .then(res => res.json());
@@ -53,7 +53,7 @@ const refreshTokens = async (): Promise<void> =>{
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           refreshToken: Rt,
-          expiresInMins: 2, 
+          expiresInMins: 5, 
         })
     })
     .then((res) =>(res.json()));
