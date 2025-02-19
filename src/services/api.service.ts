@@ -11,7 +11,7 @@ export const getUserAuthData = async ({username, password}: IUserLoginPass): Pro
             body: JSON.stringify({
               username: username,
               password: password,
-              expiresInMins: 30, 
+              expiresInMins: 2, 
             })
           })
           .then(res => res.json());
@@ -23,10 +23,10 @@ export const getUserAuthData = async ({username, password}: IUserLoginPass): Pro
     }
 }
 
-export const getAll =  async <T,>(endpoint:string, searchParams: string) => {
+export const getAll =  async(endpoint:string, searchParams: string) => {
     let sp = '';
     if (searchParams) {sp = '?'+searchParams};
-    console.log('try fetch ', APIBaseUrl+endpoint+sp);
+try {
     const response = await fetch(APIBaseUrl+endpoint+sp,
         {
             method: 'GET',
@@ -35,8 +35,13 @@ export const getAll =  async <T,>(endpoint:string, searchParams: string) => {
             }
         })
         .then(res => res.json());
-    console.log('response',response);
-    return response as T;
+        if (!response?.message) {
+            return response;
+        }
+    } catch {
+        return null;
+    }    
+    
 }
 
 const refreshTokens = async (): Promise<void> =>{
@@ -47,12 +52,12 @@ const refreshTokens = async (): Promise<void> =>{
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           refreshToken: Rt,
-          expiresInMins: 30, 
+          expiresInMins: 2, 
         })
     })
     .then((res) =>(res.json()));
     if (refreshResponse) {
-        const currentUser = getAuthUser();
+        let currentUser = getAuthUser();
         if (currentUser) {
             currentUser.accessToken = refreshResponse.accessToken;
             currentUser.refreshToken = refreshResponse.refreshToken;
@@ -63,15 +68,19 @@ const refreshTokens = async (): Promise<void> =>{
 
 export const getAuthData = async <T,> (endpoint:string, searchParams: string) => {
     try {
-        const responseObj = await getAll<T>(endpoint, searchParams);
-        return responseObj as T;
-    } catch {
-        try {
-            await refreshTokens();
-            const responseObj = await getAll<T>(endpoint, searchParams);
+        const responseObj = await getAll(endpoint, searchParams);
+        if (responseObj) {
             return responseObj as T;
-        } catch {
-            return null;
+        } else {
+            await refreshTokens();
+            const responseObj = await getAll(endpoint, searchParams);
+            if (responseObj) {
+                return responseObj as T;
+            } else {
+                return null;
+            }
         }
+    } catch {
+        return null;
     }
 }
